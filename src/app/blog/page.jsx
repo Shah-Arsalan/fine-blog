@@ -3,10 +3,32 @@ import styles from "./blog.module.css"
 import PostCard from '@/components/postCard/postCard'
 import { getPosts } from '@/lib/data'
 
+const getAllPosts = async () => {
+  const res = await fetch('http://localhost:3000/api/blog');
+  if(!res.ok){
+    throw new Error("Something went wrong");
+  }
+  
+  console.log("the response of api is", res);
+
+  return res.json();
+}
+
 async function BlogPosts() {
-  const posts = await getPosts();
-  console.log("posts in db are", posts);
-  console.log("blog page running...")
+
+  // without using  api 
+
+  // const posts = await getPosts();
+  // console.log("posts in db are", posts);
+  // console.log("blog page running...")
+
+  // with api
+
+  const posts = await getAllPosts();
+
+
+
+
   return (
     <div className={styles.container}>
 

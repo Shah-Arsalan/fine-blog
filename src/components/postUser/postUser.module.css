@@ -17,3 +17,8 @@
 .username{
     font-weight: 500;
 }
+
+.avatar{
+    object-fit: cover;
+    border-radius: 50%;
+}

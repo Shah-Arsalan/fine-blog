@@ -3,6 +3,12 @@ import styles from "./contact.module.css"
 
 import React from 'react'
 
+export const metadata = {
+  title: 'Next App Contact Page',
+  description: 'Contact description',
+}
+
+
 function ContactPage() {
   return (
     <div className={styles.container}>
