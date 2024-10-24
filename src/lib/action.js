@@ -219,6 +219,7 @@ export const deleteUser = async (formData) =>{
         connectToDb();
         await Post.deleteMany({userId:id});
         await User.findByIdAndDelete(id);
+        revalidatePath("/blog")
         revalidatePath("/admin");
         
     } catch (error) {

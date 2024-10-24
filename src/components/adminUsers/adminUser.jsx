@@ -21,7 +21,7 @@ const AdminUsers = async () => {
         return (
           <div className={styles.user} key={user.id}>
             <div className={styles.detail}>
-            <img src={user.img ? user.img :( base64Image || "/noAvatar.png") } alt='' fill className={styles.img} />
+            <img src={user.img ? user.img : ( bufferImage?.data ? base64Image : "/noAvatar.png") } alt='' fill className={styles.img} />
               <span>{user.username}</span>
             </div>
             <form action={deleteUser}>
