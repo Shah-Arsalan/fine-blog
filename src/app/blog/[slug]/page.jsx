@@ -19,7 +19,7 @@ export const generateMetadata = async ({params}) => {
 
 
 const getSinglePost = async (slug) => {
-    const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+    const res = await fetch(`https://fine-blog-two.vercel.app//api/blog/${slug}`);
     console.log('the res from slug api is' , res);
     
     if(!res.ok){

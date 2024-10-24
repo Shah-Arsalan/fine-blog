@@ -4,7 +4,7 @@ import PostCard from '@/components/postCard/postCard'
 import { getPosts } from '@/lib/data'
 
 const getAllPosts = async () => {
-  const res = await fetch('http://localhost:3000/api/blog');
+  const res = await fetch('https://fine-blog-two.vercel.app//api/blog');
   if(!res.ok){
     throw new Error("Something went wrong");
   }
