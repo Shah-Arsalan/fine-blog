@@ -3,6 +3,7 @@ import styles from "./singlePost.module.css"
 import Image from 'next/image'
 import { getPost } from '@/lib/data';
 import PostUser from '@/components/postUser/postUser';
+import { convertBase64ToUrl } from '@/lib/utils';
 
 
 export const generateMetadata = async ({params}) => {
@@ -32,23 +33,21 @@ async function SinglePostPage({params}) {
 
 
     const {slug} = params;
-    console.log("the slug is", slug);
-
-    // without api
-
-    // const post = await getPost(slug);
-    // console.log("the current post is", post);
-    // console.log("the current post id is", post);
-
-    //with api
-
     const post = await getSinglePost(slug);
+    const { bufferImage, img } = post;
+
+    let base64Image = null;
+
+    if (!img) {
+      base64Image = convertBase64ToUrl(bufferImage);
+    }
+
 
     
   return (
     <div className={styles.container}>
         <div className={styles.imgContainer}>
-            <Image className={styles.img} src={post.img} alt="" fill/>
+            <Image className={styles.img} src={img ? img : base64Image} alt="" fill/>
         </div>
         <div className={styles.textContainer}>  
             <h1 className={styles.title}>{post.title}</h1>

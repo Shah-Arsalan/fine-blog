@@ -11,7 +11,7 @@ async function Navbar() {
     const handleLogoutFunc = handleLogout;
     return (
         <div className={styles.container}>
-            <div>Logo</div>
+            <div  className={styles.logo}>Fine Blog</div>
             <div>
                 <Links session={session} handleLogout={handleLogoutFunc}/>
             </div>

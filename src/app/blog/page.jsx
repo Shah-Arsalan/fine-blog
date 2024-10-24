@@ -25,6 +25,7 @@ async function BlogPosts() {
   // with api
 
   const posts = await getAllPosts();
+  console.log("all posts are", posts);
 
 
 

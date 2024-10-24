@@ -1,9 +1,12 @@
 "use server"
 import { revalidatePath } from "next/cache";
-import { signIn, signOut } from "./auth";
+import { auth, signIn, signOut } from "./auth";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import bcrypt from "bcryptjs";
+import { getUser } from "./data";
+
+
 
 // Authentication 
 
@@ -86,7 +89,9 @@ export const handleLogout = async () => {
 
 
 export const addPost =  async (prevState , formData) => {
-    const{title , desc , slug , userId } = Object.fromEntries(formData);
+    const{title , desc , slug , userId ,img} = Object.fromEntries(formData);
+    const imgFile = formData.get('bufferImage');
+    console.log("the imgFile is", imgFile);
 
     try {
 
@@ -95,11 +100,17 @@ export const addPost =  async (prevState , formData) => {
             title,
             desc,
             slug,
-            userId
+            userId,
+            bufferImage: {
+                data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
+                contentType: imgFile ? imgFile.type : null
+              },
+              img
         })
 
         await newPost.save();
         console.log("post saved to db");
+        revalidatePath("/blog");
         revalidatePath("/admin");
         
     } catch (error) {
@@ -130,7 +141,9 @@ export const deletePost = async ( formData) => {
 }
 
 export const addUser = async (prevState , formData) =>{
-    const {username , email , password , img} = Object.fromEntries(formData);
+    const {username , email , password , img , bufferImage , isAdmin} = Object.fromEntries(formData);
+    const imgFile = formData.get('bufferImage');
+    console.log("the imgFile is", imgFile);
 
     try {
         connectToDb();
@@ -138,7 +151,13 @@ export const addUser = async (prevState , formData) =>{
             username,
             email,
             password,
-            img
+            img,
+            bufferImage: {
+                data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
+                contentType: imgFile ? imgFile.type : null
+              },
+              isAdmin
+
         })
 
         await newUser.save();
@@ -151,6 +170,46 @@ export const addUser = async (prevState , formData) =>{
         
     }
 }
+
+export const editUser = async (prevState, formData) => {
+    const { username, img, isAdmin , id } = Object.fromEntries(formData);
+    const imgFile = formData.get('bufferImage');
+    console.log("details in editUser 😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫", username, img, isAdmin , id  )
+    console.log("the imgFile is", imgFile);
+
+    try {
+        connectToDb();
+        
+        const user = await User.findById(id);
+
+        if (!user) {
+            return {error : "No user exits!"}
+        }
+
+        user.username = username || user.username;
+        user.img = img || user.img;
+        if (imgFile) {
+            user.bufferImage = {
+                data: Buffer.from(await imgFile.arrayBuffer()), 
+                contentType: imgFile.type
+            };
+        }
+
+        user.isAdmin = isAdmin || user.isAdmin
+
+        await user.save();
+        console.log("User updated ✅");
+        revalidatePath("/profile");
+        revalidatePath("/admin");
+        return {message : "User Updated. Click 🔙 to return to profile page"}
+       
+
+    } catch (error) {
+        console.log(error);
+        return { error: "Something went wrong!" };
+    }
+}
+
 
 
 export const deleteUser = async (formData) =>{
@@ -167,4 +226,16 @@ export const deleteUser = async (formData) =>{
         return {error : "Something went wrong"};
         
     }
+}
+
+
+export const getSession = async () => {
+    const session = await auth();
+    return session;
+}
+
+
+export const userGetter = async (id) =>{
+    const singleUser = await getUser(id);
+    return singleUser;
 }

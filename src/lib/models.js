@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     img:{
         type:String
     },
+    bufferImage : {
+        data: Buffer,
+        contentType: String
+    },
     isAdmin:{
         type:Boolean,
         default:false
@@ -47,6 +51,10 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:true,
         unique:true
+    },
+    bufferImage : {
+        data: Buffer,
+        contentType: String
     },
     userId:{
         type:String,

@@ -1,0 +1,43 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; 
+    gap: 30px;
+
+}
+
+.profileImageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImage {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 20px;
+}
+
+.profileDetails p {
+border: 1px solid white;
+padding: 5px;
+border-radius: 5px;
+margin-left: 3px;
+}
+
+
+
+.profileDetails p {
+    margin: 5px 0;
+}

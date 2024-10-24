@@ -26,6 +26,7 @@ function Links({session , handleLogout}) {
             title: "Blog",
             path: "/blog",
         },
+    
     ]
 
     const isAdmin = session?.user?.isAdmin;
@@ -38,6 +39,7 @@ function Links({session , handleLogout}) {
             {
                 session?.user ? (
                     <>
+                    <NavLink  item={{ title: "Profile", path: "/profile" }}/>
                         {
                         isAdmin && (<NavLink item={{ title: "Admin", path: "/admin" }} />)
                         }
