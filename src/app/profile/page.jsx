@@ -12,16 +12,16 @@ import { convertBase64ToUrl } from "@/lib/utils";
 const ProfilePage = () => {
     const [user , setUser] = useState()
     const [appear , setAppear] = useState(false);
-    let base64Image = null;
+    // let base64Image = null;
 
-    if(user){
-        const { bufferImage, img } = user;
+    // if(user){
+    //     const { bufferImage, img } = user;
     
-        if (!img) {
-            base64Image = convertBase64ToUrl(bufferImage);
-        }
+    //     if (!img) {
+    //         base64Image = convertBase64ToUrl(bufferImage);
+    //     }
 
-    }
+    // }
    
 
     useEffect(()=>{
@@ -42,7 +42,7 @@ const ProfilePage = () => {
         <div className={styles.Container}>
             <div className={styles.profileImageContainer}>
                 <Image
-                    src={user?.img ? user.img : ( base64Image || "/noAvatar.png")}
+                    src={user?.img ? user.img : "/noAvatar.png"}
                     alt="Profile Picture"
                     width={150}
                     height={150}

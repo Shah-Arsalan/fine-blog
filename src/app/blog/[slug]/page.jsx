@@ -36,18 +36,18 @@ async function SinglePostPage({params}) {
     const post = await getSinglePost(slug);
     const { bufferImage, img } = post;
 
-    let base64Image = null;
+    // let base64Image = null;
 
-    if (!img) {
-      base64Image = convertBase64ToUrl(bufferImage);
-    }
+    // if (!img) {
+    //   base64Image = convertBase64ToUrl(bufferImage);
+    // }
 
 
     
   return (
     <div className={styles.container}>
         <div className={styles.imgContainer}>
-            <Image className={styles.img} src={img ? img : base64Image} alt="" fill/>
+            <Image className={styles.img} src={img ? img : "/noAvatar.png"} alt="" fill/>
         </div>
         <div className={styles.textContainer}>  
             <h1 className={styles.title}>{post.title}</h1>

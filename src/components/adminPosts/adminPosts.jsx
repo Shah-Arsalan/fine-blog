@@ -13,15 +13,15 @@ const AdminPosts = async () => {
       {posts.map((post) => {
         const { bufferImage, img } = post;
 
-        let base64Image = null;
+        // let base64Image = null;
 
-        if (!img) {
-          base64Image = convertBase64ToUrl(bufferImage);
-        }
+        // if (!img) {
+        //   base64Image = convertBase64ToUrl(bufferImage);
+        // }
         return (
           <div className={styles.post} key={post.id}>
             <div className={styles.detail}>
-              <img src={post.img ? post.img : base64Image} alt='' fill className={styles.img} />
+              <img src={post.img ? post.img : "/noAvatar.png"} alt='' fill className={styles.img} />
               <span className={styles.postTitle}>{post.title}</span>
             </div>
             <form action={deletePost}>

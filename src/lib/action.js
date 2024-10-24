@@ -90,8 +90,8 @@ export const handleLogout = async () => {
 
 export const addPost =  async (prevState , formData) => {
     const{title , desc , slug , userId ,img} = Object.fromEntries(formData);
-    const imgFile = formData.get('bufferImage');
-    console.log("the imgFile is", imgFile);
+    // const imgFile = formData.get('bufferImage');
+    // console.log("the imgFile is", imgFile);
 
     try {
 
@@ -101,10 +101,10 @@ export const addPost =  async (prevState , formData) => {
             desc,
             slug,
             userId,
-            bufferImage: {
-                data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
-                contentType: imgFile ? imgFile.type : null
-              },
+            // bufferImage: {
+            //     data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
+            //     contentType: imgFile ? imgFile.type : null
+            //   },
               img
         })
 
@@ -141,9 +141,9 @@ export const deletePost = async ( formData) => {
 }
 
 export const addUser = async (prevState , formData) =>{
-    const {username , email , password , img , bufferImage , isAdmin} = Object.fromEntries(formData);
-    const imgFile = formData.get('bufferImage');
-    console.log("the imgFile is", imgFile);
+    const {username , email , password , img  , isAdmin} = Object.fromEntries(formData);
+    // const imgFile = formData.get('bufferImage');
+    // console.log("the imgFile is", imgFile);
 
     try {
         connectToDb();
@@ -152,10 +152,10 @@ export const addUser = async (prevState , formData) =>{
             email,
             password,
             img,
-            bufferImage: {
-                data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
-                contentType: imgFile ? imgFile.type : null
-              },
+            // bufferImage: {
+            //     data: imgFile ? Buffer.from(await imgFile.arrayBuffer()) : null, // Convert ArrayBuffer to Buffer
+            //     contentType: imgFile ? imgFile.type : null
+            //   },
               isAdmin
 
         })
@@ -173,9 +173,9 @@ export const addUser = async (prevState , formData) =>{
 
 export const editUser = async (prevState, formData) => {
     const { username, img, isAdmin , id } = Object.fromEntries(formData);
-    const imgFile = formData.get('bufferImage');
-    console.log("details in editUser 😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫", username, img, isAdmin , id  )
-    console.log("the imgFile is", imgFile);
+    // const imgFile = formData.get('bufferImage');
+    // console.log("details in editUser 😵‍💫😵‍💫😵‍💫😵‍💫😵‍💫", username, img, isAdmin , id  )
+    // console.log("the imgFile is", imgFile);
 
     try {
         connectToDb();
@@ -188,12 +188,12 @@ export const editUser = async (prevState, formData) => {
 
         user.username = username || user.username;
         user.img = img || user.img;
-        if (imgFile) {
-            user.bufferImage = {
-                data: Buffer.from(await imgFile.arrayBuffer()), 
-                contentType: imgFile.type
-            };
-        }
+        // if (imgFile) {
+        //     user.bufferImage = {
+        //         data: Buffer.from(await imgFile.arrayBuffer()), 
+        //         contentType: imgFile.type
+        //     };
+        // }
 
         user.isAdmin = isAdmin || user.isAdmin
 

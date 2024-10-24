@@ -16,8 +16,8 @@ const AdminUserForm = () => {
       <input type="text" name="email" placeholder="email" />
       <input type="password" name="password" placeholder="password" />
       <input type="text" name="img" placeholder="add image url" disabled={filedValues.uploader !== null ? true : false} onChange={(e) => setFieldValues({ ...filedValues, url: e.target.value })} />
-      <h4 style={{textAlign:"center"}}>Or</h4>
-      <input type="file"  name="bufferImage" accept="image" disabled={filedValues.url !== "" ? true : false} onChange={(e) => setFieldValues({ ...filedValues, uploader: e.target.value })} />
+      {/* <h4 style={{textAlign:"center"}}>Or</h4> */}
+      {/* <input type="file"  name="bufferImage" accept="image" disabled={filedValues.url !== "" ? true : false} onChange={(e) => setFieldValues({ ...filedValues, uploader: e.target.value })} /> */}
       <select name="isAdmin">
         <option value={false}>Is Admin?</option>
         <option value={false}>No</option>

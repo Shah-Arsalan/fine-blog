@@ -9,7 +9,7 @@ export const authConfig = {
                 token.id = user.id,
                 token.isAdmin = user.isAdmin,
                 token.img = user.img,
-                token.bufferImage = user.bufferImage,
+                // token.bufferImage = user.bufferImage,
                 token.username = user.username,
                 token.createdAt = user.createdAt
             }
@@ -22,7 +22,7 @@ export const authConfig = {
             session.user.id = token.id;
             session.user.isAdmin = token.isAdmin;
             session.user.img = token.img;
-            session.user.bufferImage = token.bufferImage,
+            // session.user.bufferImage = token.bufferImage,
             session.user.username = token.username,
             session.user.createdAt = token.createdAt
 

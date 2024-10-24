@@ -13,15 +13,15 @@ const AdminUsers = async () => {
       {users.map((user) => {
         const { bufferImage, img } = user;
 
-        let base64Image = null;
+        // let base64Image = null;
 
-        if (!img) {
-          base64Image = convertBase64ToUrl(bufferImage);
-        }
+        // if (!img) {
+        //   base64Image = convertBase64ToUrl(bufferImage);
+        // }
         return (
           <div className={styles.user} key={user.id}>
             <div className={styles.detail}>
-            <img src={user.img ? user.img : ( bufferImage?.data ? base64Image : "/noAvatar.png") } alt='' fill className={styles.img} />
+            <img src={user.img ? user.img : "/noAvatar.png" } alt='' fill className={styles.img} />
               <span>{user.username}</span>
             </div>
             <form action={deleteUser}>
